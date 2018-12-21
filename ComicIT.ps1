@@ -88,7 +88,7 @@ function Find-CommitStripImage {
         {
             'No' {        
                     $resquest =Invoke-RestMethod $URLCommitStrip
-                    $Image = $(Invoke-WebRequest -uri $resquest[0].link).Images[0].src
+                    $Image = $(Invoke-WebRequest -uri $resquest[0].link).Images.src | where {$_ -like "https://***"}
                     [String]$Title = $resquest[0].title
                     
                  }
@@ -96,7 +96,7 @@ function Find-CommitStripImage {
                     $resquest =Invoke-RestMethod $URLCommitStrip
                     $NB = $resquest.Count
                     $PostNb=get-random -Minimum 0 -Maximum $NB
-                    $Image = $(Invoke-WebRequest -uri $resquest[$PostNb].link).Images[0].src
+                    $Image = $(Invoke-WebRequest -uri $resquest[$PostNb].link).Images.src | where {$_ -like "https://***"}
                     [String]$Title =  $resquest[$PostNb].title
                     [String]$Date = $resquest[$PostNb].pubDate
 
